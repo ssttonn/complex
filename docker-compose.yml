@@ -1,0 +1,30 @@
+services:
+  nginx:
+    image: "sstonn/multi-nginx"
+    mem_limit: 128m
+    hostname: nginx
+    ports:
+      - "80:80"
+  server:
+    image: "sstonn/multi-server"
+    hostname: api
+    mem_limit: 128m
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - PGHOST=${PGHOST}
+      - PGUSER=${PGUSER}
+      - PGDATABASE=${PGDATABASE}
+      - PGPASSWORD=${PGPASSWORD}
+      - PGPORT=${PGPORT}
+  client:
+    image: "sstonn/multi-client"
+    hostname: client
+    mem_limit: 128m
+  worker:
+    image: "sstonn/multi-worker"
+    hostname: worker
+    mem_limit: 128m
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}

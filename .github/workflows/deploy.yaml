@@ -69,3 +69,18 @@ jobs:
       - name: Push Docker Production Worker Container to Docker Hub
         run: docker push sstonn/multi-worker
 
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: multid-docker
+          environment_name: Multid-docker-env
+          existing_bucket_name: elasticbeanstalk-ap-southeast-2-339712796583
+          region: ap-southeast-2
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
+
