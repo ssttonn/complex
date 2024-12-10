@@ -62,7 +62,10 @@ jobs:
 
       - name: Push Docker Production Containers to Docker Hub
         run: docker push astrotify/multi-client
+      - name: Push Docker Production Nginx Container to Docker Hub
         run: docker push astrotify/multi-nginx
+      - name: Push Docker Production Server Container to Docker Hub
         run: docker push astrotify/multi-server
+      - name: Push Docker Production Worker Container to Docker Hub
         run: docker push astrotify/multi-worker
 
