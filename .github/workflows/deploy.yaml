@@ -13,9 +13,9 @@
 #       - name: Login to Docker
 #         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 #       - name: Build Docker Container
-#         run: docker build -t astrotify/react-test -f Dockerfile.dev .
+#         run: docker build -t sstonn/react-test -f Dockerfile.dev .
 #       - name: Run test for Docker Container
-#         run: docker run -e CI=true astrotify/react-test npm test
+#         run: docker run -e CI=true sstonn/react-test npm test
 
 #       - name: Generate deployment package
 #         run: zip -r deploy.zip . -x '*.git*'
@@ -47,25 +47,25 @@ jobs:
       - name: Login to Docker
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Test Container  
-        run: docker build -t astrotify/react-test -f ./client/Dockerfile.dev ./client
+        run: docker build -t sstonn/react-test -f ./client/Dockerfile.dev ./client
       - name: Run test for Docker Container
-        run: docker run -e CI=true astrotify/react-test npm test
+        run: docker run -e CI=true sstonn/react-test npm test
 
       - name: Build Docker Production Container
-        run: docker build -t astrotify/multi-client ./client
+        run: docker build -t sstonn/multi-client ./client
       - name: Build Docker Production Nginx Container
-        run: docker build -t astrotify/multi-nginx ./nginx
+        run: docker build -t sstonn/multi-nginx ./nginx
       - name: Build Docker Production Server Container
-        run: docker build -t astrotify/multi-server ./server
+        run: docker build -t sstonn/multi-server ./server
       - name: Build Docker Production Worker Container
-        run: docker build -t astrotify/multi-worker ./worker
+        run: docker build -t sstonn/multi-worker ./worker
 
       - name: Push Docker Production Containers to Docker Hub
-        run: docker push astrotify/multi-client
+        run: docker push sstonn/multi-client
       - name: Push Docker Production Nginx Container to Docker Hub
-        run: docker push astrotify/multi-nginx
+        run: docker push sstonn/multi-nginx
       - name: Push Docker Production Server Container to Docker Hub
-        run: docker push astrotify/multi-server
+        run: docker push sstonn/multi-server
       - name: Push Docker Production Worker Container to Docker Hub
-        run: docker push astrotify/multi-worker
+        run: docker push sstonn/multi-worker
 
